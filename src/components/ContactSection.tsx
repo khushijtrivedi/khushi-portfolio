@@ -1,17 +1,15 @@
 'use client';
 import { forwardRef } from 'react';
-
-const CONTACT = [
-  { label: 'Email', val: 'khushi.trivedi.j@gmail.com', href: 'mailto:khushi.trivedi.j@gmail.com' },
-  { label: 'LinkedIn', val: 'linkedin.com/in/khushitrivedij', href: 'https://linkedin.com/in/khushitrivedij' },
-  { label: 'GitHub', val: 'github.com/khushijtrivedi', href: 'https://github.com/khushijtrivedi' },
-  { label: 'Location', val: 'Surat, Gujarat, India', href: '#' },
-];
+import { CONTACT, SECTION_HEADERS, HERO_CTA, SITE_META } from './data';
 
 const ContactSection = forwardRef<HTMLElement>((_, ref) => (
   <section
     ref={ref}
-    style={{ padding: '0 48px 112px', maxWidth: 920, margin: '0 auto', position: 'relative', zIndex: 10 }}
+    style={{
+      padding: 'clamp(40px, 8vw, 80px) clamp(16px, 6vw, 48px) 112px',
+      maxWidth: 920, margin: '0 auto',
+      position: 'relative', zIndex: 10,
+    }}
   >
     {/* Header */}
     <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 24 }}>
@@ -19,31 +17,39 @@ const ContactSection = forwardRef<HTMLElement>((_, ref) => (
         fontFamily: "'JetBrains Mono', monospace",
         fontSize: 10, letterSpacing: '3px',
         color: 'var(--gold)', opacity: 0.8,
-      }}>03</span>
+      }}>
+        {SECTION_HEADERS.contact.num}
+      </span>
 
       <h2 style={{
         fontFamily: "'Playfair Display', serif",
-        fontSize: 32, color: 'var(--text)', margin: 0,
+        fontSize: 'clamp(24px, 4vw, 32px)',
+        color: 'var(--text)', margin: 0,
       }}>
-        Find <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>Me</em>
+        {SECTION_HEADERS.contact.title}{' '}
+        <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>
+          {SECTION_HEADERS.contact.em}
+        </em>
       </h2>
 
       <div style={{ flex: 1, height: 1, background: 'var(--border)' }} />
     </div>
 
+    {/* Tagline */}
     <p style={{
-      fontFamily: 'sans-serif', fontSize: 16,
+      fontFamily: 'sans-serif', fontSize: 'clamp(14px, 2vw, 16px)',
       color: 'var(--muted)', marginBottom: 40, lineHeight: 1.7,
       maxWidth: 560,
     }}>
-      Whether you have a role, a project, or just want to talk about crochet patterns —
-      I&apos;m easy to reach.
+      {HERO_CTA.contactTagline}
     </p>
 
-    {/* Grid */}
+    {/* Grid — responsive: 2 cols on desktop, 1 on mobile */}
     <div style={{
-      display: 'grid', gridTemplateColumns: '1fr 1fr',
-      gap: 13, maxWidth: 720,
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 280px), 1fr))',
+      gap: 13,
+      maxWidth: 720,
     }}>
       {CONTACT.map((c) => (
         <a
@@ -56,9 +62,9 @@ const ContactSection = forwardRef<HTMLElement>((_, ref) => (
             borderRadius: 12,
             border: '1px solid var(--border)',
             background: 'var(--surface)',
-            padding: '22px 26px',
-            textDecoration: 'none',  /* removes underline */
-            color: 'inherit',         /* kills blue link color */
+            padding: 'clamp(16px, 3vw, 22px) clamp(16px, 3vw, 26px)',
+            textDecoration: 'none',
+            color: 'inherit',
             transition: 'all 0.2s',
           }}
           onMouseEnter={e => {
@@ -85,8 +91,10 @@ const ContactSection = forwardRef<HTMLElement>((_, ref) => (
             {c.label}
           </div>
           <div style={{
-            fontFamily: 'sans-serif', fontSize: 15,
+            fontFamily: 'sans-serif',
+            fontSize: 'clamp(13px, 2vw, 15px)',
             color: 'var(--text)', opacity: 0.9, lineHeight: 1.4,
+            wordBreak: 'break-all',  // prevents email overflow on mobile
           }}>
             {c.val}
           </div>
@@ -102,7 +110,7 @@ const ContactSection = forwardRef<HTMLElement>((_, ref) => (
       fontFamily: 'sans-serif', fontSize: 12,
       letterSpacing: '1px', color: 'var(--muted)',
     }}>
-      built with ☕ yarn &amp; way too many tabs open · khushi trivedi · {new Date().getFullYear()}
+      {SITE_META.footerQuip} · {SITE_META.name.toLowerCase()} · {new Date().getFullYear()}
     </footer>
   </section>
 ));

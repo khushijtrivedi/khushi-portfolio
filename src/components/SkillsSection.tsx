@@ -1,48 +1,15 @@
 'use client';
 import { forwardRef } from 'react';
-
-const SKILL_GROUPS = [
-  {
-    category: 'Frontend',
-    icon: '🖼️',
-    skills: ['React.js', 'Next.js', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3'],
-  },
-  {
-    category: 'Backend',
-    icon: '⚙️',
-    skills: ['Node.js', 'REST APIs', 'Microservices', 'Flask', 'Python'],
-  },
-  {
-    category: 'AI & LLM',
-    icon: '🤖',
-    skills: ['LangChain', 'Mastra', 'LLM Integrations', 'Agentic Workflows', 'Prompt Engineering'],
-  },
-  {
-    category: 'Database',
-    icon: '🗄️',
-    skills: ['MySQL', 'SQL'],
-  },
-  {
-    category: 'Cloud & DevOps',
-    icon: '☁️',
-    skills: ['AWS S3', 'AWS Lambda', 'AWS SQS', 'Serverless', 'Docker', 'Capacitor'],
-  },
-  {
-    category: 'Auth & Payments',
-    icon: '🔐',
-    skills: ['BetterAuth', 'Passkey', '2FA', 'Stripe API'],
-  },
-  {
-    category: 'Tools',
-    icon: '🛠️',
-    skills: ['Git', 'GitHub'],
-  },
-];
+import { SKILL_GROUPS, SECTION_HEADERS } from './data';
 
 const SkillsSection = forwardRef<HTMLElement>((_, ref) => (
   <section
     ref={ref}
-    style={{ padding: '0 48px 80px', maxWidth: 920, margin: '0 auto', position: 'relative', zIndex: 10 }}
+    style={{
+      padding: 'clamp(40px, 8vw, 80px) clamp(16px, 6vw, 48px)',
+      maxWidth: 920, margin: '0 auto',
+      position: 'relative', zIndex: 10,
+    }}
   >
     {/* Header */}
     <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 24 }}>
@@ -50,31 +17,39 @@ const SkillsSection = forwardRef<HTMLElement>((_, ref) => (
         fontFamily: "'JetBrains Mono', monospace",
         fontSize: 10, letterSpacing: '3px',
         color: 'var(--gold)', opacity: 0.8,
-      }}>02</span>
+      }}>
+        {SECTION_HEADERS.skills.num}
+      </span>
 
       <h2 style={{
         fontFamily: "'Playfair Display', serif",
-        fontSize: 32, color: 'var(--text)', margin: 0,
+        fontSize: 'clamp(24px, 4vw, 32px)',
+        color: 'var(--text)', margin: 0,
       }}>
-        The <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>Stack</em>
+        {SECTION_HEADERS.skills.title}{' '}
+        <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>
+          {SECTION_HEADERS.skills.em}
+        </em>
       </h2>
 
       <div style={{ flex: 1, height: 1, background: 'var(--border)' }} />
     </div>
 
+    {/* Sub heading */}
     <p style={{
       fontFamily: "'Playfair Display', serif",
-      fontStyle: 'italic', fontSize: 16,
+      fontStyle: 'italic',
+      fontSize: 'clamp(14px, 2vw, 16px)',
       color: 'var(--text)', opacity: 0.65,
       maxWidth: 440, marginBottom: 48, lineHeight: 1.7,
     }}>
-      The tools I reach for. Earned through shipping, not just learning.
+      {SECTION_HEADERS.skills.sub}
     </p>
 
-    {/* Skill groups */}
+    {/* Skill groups grid */}
     <div style={{
       display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
+      gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 260px), 1fr))',
       gap: 16,
     }}>
       {SKILL_GROUPS.map((group) => (
@@ -84,7 +59,14 @@ const SkillsSection = forwardRef<HTMLElement>((_, ref) => (
             background: 'var(--surface)',
             border: '1px solid var(--border)',
             borderRadius: 16,
-            padding: '20px 22px',
+            padding: 'clamp(16px, 3vw, 20px) clamp(16px, 3vw, 22px)',
+            transition: 'border-color 0.2s',
+          }}
+          onMouseEnter={e => {
+            (e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(200,129,58,0.3)';
+          }}
+          onMouseLeave={e => {
+            (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--border)';
           }}
         >
           {/* Category header */}
@@ -107,7 +89,7 @@ const SkillsSection = forwardRef<HTMLElement>((_, ref) => (
                 key={skill}
                 style={{
                   fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: 11,
+                  fontSize: 'clamp(9px, 1.5vw, 11px)',
                   padding: '5px 12px',
                   borderRadius: 100,
                   border: '1px solid var(--border)',
