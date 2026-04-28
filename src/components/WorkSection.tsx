@@ -165,11 +165,27 @@ const CAT_COLOR: Record<string, string> = {
 };
 
 /* ── Modal ─────────────────────────────────────────────────── */
+// Add this to your WorkSection.tsx
+// Replace the existing ProjectModal function with this fixed version
+
 function ProjectModal({ project, onClose }: { project: typeof PROJECTS[0]; onClose: () => void }) {
+  
+  // ✅ FIX: Lock body scroll when modal is open
   useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';  // prevents iOS Safari scroll bleed
+    document.body.style.width = '100%';
+
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
     document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
+
+    return () => {
+      // Restore scroll on close
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.removeEventListener('keydown', onKey);
+    };
   }, [onClose]);
 
   return (
@@ -181,6 +197,8 @@ function ProjectModal({ project, onClose }: { project: typeof PROJECTS[0]; onClo
         backdropFilter: 'blur(4px)',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         padding: '24px',
+        // ✅ FIX: Modal backdrop handles its own scroll, never bleeds
+        overflowY: 'auto',
       }}
     >
       <div
@@ -192,7 +210,9 @@ function ProjectModal({ project, onClose }: { project: typeof PROJECTS[0]; onClo
           background: 'var(--bg)',
           border: '1px solid var(--border)',
           borderRadius: 20,
-          padding: '32px',
+          padding: 'clamp(20px, 4vw, 32px)',
+          // ✅ FIX: Isolate scroll context
+          overscrollBehavior: 'contain',
         }}
       >
         {/* Modal header */}
@@ -212,7 +232,7 @@ function ProjectModal({ project, onClose }: { project: typeof PROJECTS[0]; onClo
             </div>
             <h3 style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: 26, fontWeight: 900,
+              fontSize: 'clamp(18px, 3vw, 26px)', fontWeight: 900,
               color: 'var(--text)', margin: '0 0 4px',
             }}>
               {project.title}
@@ -243,63 +263,36 @@ function ProjectModal({ project, onClose }: { project: typeof PROJECTS[0]; onClo
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: 9, letterSpacing: '3px', textTransform: 'uppercase',
               color: 'var(--muted)', opacity: 0.6,
-            }}>
-              Features shipped
-            </span>
-            <span style={{
-              fontFamily: "'JetBrains Mono', monospace",
-              fontSize: 11, color: 'var(--gold)',
-            }}>
+            }}>Features shipped</span>
+            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11, color: 'var(--gold)' }}>
               {project.id === 'C' ? '20+' : project.totalFeatures}
             </span>
           </div>
-          <div style={{
-            width: '100%', height: 3,
-            background: 'var(--border)', borderRadius: 3, overflow: 'hidden',
-          }}>
+          <div style={{ width: '100%', height: 3, background: 'var(--border)', borderRadius: 3, overflow: 'hidden' }}>
             <div style={{
-              width: project.id === 'C' ? '80%' : '100%',
-              height: '100%',
-              background: 'linear-gradient(90deg, #c8813a, #e8c99a)',
-              borderRadius: 3,
+              width: project.id === 'C' ? '80%' : '100%', height: '100%',
+              background: 'linear-gradient(90deg, #c8813a, #e8c99a)', borderRadius: 3,
             }} />
           </div>
         </div>
 
-        {/* Category breakdown mini-chart */}
+        {/* Work breakdown */}
         <div style={{ marginBottom: 32 }}>
           <div style={{
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 9, letterSpacing: '3px', textTransform: 'uppercase',
             color: 'var(--muted)', opacity: 0.6, marginBottom: 14,
-          }}>
-            Work breakdown
-          </div>
+          }}>Work breakdown</div>
           <div style={{ display: 'flex', gap: 4, height: 8, borderRadius: 4, overflow: 'hidden', marginBottom: 12 }}>
             {project.features.map((f, i) => (
-              <div
-                key={i}
-                style={{
-                  flex: f.effort,
-                  background: CAT_COLOR[f.category] || 'var(--gold)',
-                  opacity: 0.75,
-                }}
-                title={f.name}
-              />
+              <div key={i} style={{ flex: f.effort, background: CAT_COLOR[f.category] || 'var(--gold)', opacity: 0.75 }} title={f.name} />
             ))}
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
             {project.features.map((f, i) => (
               <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                <div style={{
-                  width: 8, height: 8, borderRadius: 2,
-                  background: CAT_COLOR[f.category] || 'var(--gold)',
-                  opacity: 0.75,
-                }} />
-                <span style={{
-                  fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: 10, color: 'var(--muted)', opacity: 0.7,
-                }}>
+                <div style={{ width: 8, height: 8, borderRadius: 2, background: CAT_COLOR[f.category] || 'var(--gold)', opacity: 0.75 }} />
+                <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, color: 'var(--muted)', opacity: 0.7 }}>
                   {f.category}
                 </span>
               </div>
@@ -310,53 +303,33 @@ function ProjectModal({ project, onClose }: { project: typeof PROJECTS[0]; onClo
         {/* Feature list */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
           {project.features.map((feat, i) => (
-            <div
-              key={i}
-              style={{
-                background: 'var(--surface)',
-                border: '1px solid var(--border)',
-                borderRadius: 12,
-                padding: '16px 18px',
-                borderLeft: `3px solid ${CAT_COLOR[feat.category] || 'var(--gold)'}`,
-              }}
-            >
+            <div key={i} style={{
+              background: 'var(--surface)', border: '1px solid var(--border)',
+              borderRadius: 12, padding: '16px 18px',
+              borderLeft: `3px solid ${CAT_COLOR[feat.category] || 'var(--gold)'}`,
+            }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
-                <div style={{
-                  fontFamily: "'Playfair Display', serif",
-                  fontSize: 15, fontWeight: 700,
-                  color: 'var(--text)',
-                }}>
+                <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 15, fontWeight: 700, color: 'var(--text)' }}>
                   {feat.name}
                 </div>
                 <span style={{
-                  fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: 9, letterSpacing: '2px',
-                  textTransform: 'uppercase',
-                  color: CAT_COLOR[feat.category] || 'var(--gold)',
+                  fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: '2px',
+                  textTransform: 'uppercase', color: CAT_COLOR[feat.category] || 'var(--gold)',
                   opacity: 0.8, flexShrink: 0, marginLeft: 12,
                 }}>
                   {feat.category}
                 </span>
               </div>
-
-              <p style={{
-                fontSize: 13, lineHeight: 1.65,
-                color: 'var(--text)', opacity: 0.7, margin: '0 0 10px',
-              }}>
+              <p style={{ fontSize: 13, lineHeight: 1.65, color: 'var(--text)', opacity: 0.7, margin: '0 0 10px' }}>
                 {feat.desc}
               </p>
-
               <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                 {feat.tags.map(t => (
                   <span key={t} style={{
-                    fontFamily: "'JetBrains Mono', monospace",
-                    fontSize: 9,
+                    fontFamily: "'JetBrains Mono', monospace", fontSize: 9,
                     padding: '3px 9px', borderRadius: 100,
-                    border: '1px solid var(--border)',
-                    color: 'var(--muted)',
-                  }}>
-                    {t}
-                  </span>
+                    border: '1px solid var(--border)', color: 'var(--muted)',
+                  }}>{t}</span>
                 ))}
               </div>
             </div>
@@ -365,8 +338,8 @@ function ProjectModal({ project, onClose }: { project: typeof PROJECTS[0]; onClo
 
         {project.id === 'C' && (
           <div style={{
-            marginTop: 16, padding: '12px 16px',
-            borderRadius: 10, border: '1px dashed var(--border)',
+            marginTop: 16, padding: '12px 16px', borderRadius: 10,
+            border: '1px dashed var(--border)',
             fontFamily: "'JetBrains Mono', monospace",
             fontSize: 10, color: 'var(--gold)', opacity: 0.5,
             textAlign: 'center', letterSpacing: '2px',
@@ -378,7 +351,6 @@ function ProjectModal({ project, onClose }: { project: typeof PROJECTS[0]; onClo
     </div>
   );
 }
-
 /* ── Main Section ───────────────────────────────────────────── */
 const WorkSection = forwardRef<HTMLElement>((_, ref) => {
   const scrollTrackRef = useRef<HTMLDivElement>(null);
