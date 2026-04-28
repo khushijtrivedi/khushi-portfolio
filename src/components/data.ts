@@ -1,3 +1,61 @@
+// data.ts — single source of truth for ALL content
+
+export const SITE_META = {
+  name: 'Khushi Trivedi',
+  role: 'Full Stack Software Engineer',
+  roleShort: 'full stack engineer',
+  location: 'Surat, Gujarat, India',
+  email: 'khushi.trivedi.j@gmail.com',
+  emailHref: 'mailto:khushi.trivedi.j@gmail.com',
+  linkedin: 'linkedin.com/in/khushitrivedij',
+  linkedinHref: 'https://linkedin.com/in/khushitrivedij',
+  github: 'github.com/khushijtrivedi',
+  githubHref: 'https://github.com/khushijtrivedi',
+  tagline: 'Building AI-powered products from Surat to the stars',
+  bio: `React · Next.js · TypeScript · LangChain · AWS · Mastra\nShipping features that real people use every day.\nMaster's from DAIICT · Agentic AI · Things that actually work.`,
+  openToWork: true,
+  footerQuip: 'built with ☕ yarn & way too many tabs open',
+} as const
+
+export const STAR_WARS_INTRO = {
+  episode: 'Episode I',
+  title: 'A New Engineer',
+  paragraphs: [
+    `I'm a Full Stack Engineer from Surat, Gujarat. I graduated from DAIICT with an M.Sc. in Information Technology and I build things that actually work.`,
+    `My stack: React, Next.js, TypeScript on the frontend. Node.js, microservices, AWS Lambda, S3, SQS on the back. LangChain and Mastra for the AI pieces.`,
+    `At NewVariable Inc. I helped take a SaaS from zero to paid — Stripe subscriptions, passkey auth, agentic workflows, a mobile app via Capacitor. 20+ features shipped. 8,000+ users.`,
+    `I'm looking for a team that moves fast, trusts engineers to own their work, and builds things that matter.`,
+  ],
+  highlightWords: ['Surat, Gujarat', 'React, Next.js, TypeScript', 'NewVariable Inc.'],
+} as const
+
+export const HERO_PILLS: { label: string; color: 'gold' | 'cream' | 'rust' }[] = [
+  { label: 'React · Next.js · TS',      color: 'gold'  },
+  { label: 'LangChain · Mastra · LLMs', color: 'cream' },
+  { label: 'AWS S3 · Lambda · SQS',     color: 'gold'  },
+  { label: 'Agentic Workflows',          color: 'cream' },
+  { label: 'Stripe · BetterAuth · 2FA', color: 'rust'  },
+  { label: 'Node.js · Microservices',   color: 'rust'  },
+]
+
+export const HERO_CTA = {
+  primary: 'View My Work ↓',
+  secondary: 'Get In Touch',
+  contactButton: '✦ Send a Transmission ✦',
+  contactDesc: `I'm looking for a team that moves fast, trusts engineers to own their work end-to-end, and builds products that matter. If that's you, let's talk.`,
+  openBadge: 'currently open to new roles',
+  contactTagline: "Whether you have a role, a project, or just want to talk about crochet patterns — I'm easy to reach.",
+} as const
+
+export const SECTION_HEADERS = {
+  work:      { num: '01', title: 'The',        em: 'Work',       sub: 'Every career is a pour-over. Seed, grind, brew.' },
+  education: { num: '02', title: 'The',        em: 'Foundation', sub: 'Where curiosity met structure.' },
+  skills:    { num: '03', title: 'The',        em: 'Stack',      sub: 'The tools I reach for. Earned through shipping, not just learning.' },
+  life:      { num: '04', title: 'Beyond the', em: 'Code',       sub: "What I do when I'm not at a keyboard shapes how I think when I am." },
+  contact:   { num: '05', title: 'Find',       em: 'Me',         sub: '' },
+  cta:       { title: "Let's Build Something", sub: `I'm looking for a team that moves fast, trusts engineers to own their work end-to-end, and builds products that matter. If that's you, let's talk.` },
+} as const
+
 export const JOBS = [
   {
     period: 'May 2024 – Aug 2024',
@@ -44,44 +102,59 @@ export const JOBS = [
       'Integrated AWS S3, SQS, and Lambda for document storage and async processing',
     ],
   },
-];
+]
 
 export const EDUCATION = [
-  { deg: 'M.Sc. Information Technology', uni: 'DAIICT, Gandhinagar', period: '2023 – 2025' },
-  { deg: 'B.Sc. Information Technology', uni: 'VNSGU, Surat', period: '2020 – 2023' },
-];
+  {
+    degree: 'Master of Computer Science',
+    field: 'Information Technology',
+    highlight: 'M.Sc. IT',
+    school: 'DAIICT, Gandhinagar',
+    period: 'Aug 2023 – May 2025',
+    icon: '🎓',
+  },
+  {
+    degree: 'Bachelor of Computer Science',
+    field: 'Information Technology',
+    highlight: 'B.Sc. IT',
+    school: 'VNSGU, Surat',
+    period: 'Aug 2020 – May 2023',
+    icon: '📚',
+  },
+]
 
-export const SKILLS = [
-  { cat: 'Frontend',     items: ['React.js', 'Next.js', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3'] },
-  { cat: 'Backend',      items: ['Node.js', 'REST APIs', 'Microservices', 'Flask', 'Python'] },
-  { cat: 'AI & LLMs',   items: ['LangChain', 'Mastra', 'Agentic Workflows', 'Prompt Eng.'] },
-  { cat: 'Cloud',        items: ['AWS S3', 'Lambda', 'SQS', 'Docker', 'Serverless'] },
-  { cat: 'Auth & Pay',  items: ['BetterAuth', 'Passkey', '2FA', 'Stripe API'] },
-  { cat: 'Data & Tools', items: ['MySQL', 'SQL', 'Git', 'GitHub', 'Capacitor'] },
-];
+export const SKILL_GROUPS = [
+  { category: 'Frontend',        icon: '🖼️', skills: ['React.js', 'Next.js', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3'] },
+  { category: 'Backend',         icon: '⚙️', skills: ['Node.js', 'REST APIs', 'Microservices', 'Flask', 'Python'] },
+  { category: 'AI & LLM',        icon: '🤖', skills: ['LangChain', 'Mastra', 'LLM Integrations', 'Agentic Workflows', 'Prompt Engineering'] },
+  { category: 'Database',        icon: '🗄️', skills: ['MySQL', 'SQL'] },
+  { category: 'Cloud & DevOps',  icon: '☁️', skills: ['AWS S3', 'AWS Lambda', 'AWS SQS', 'Serverless', 'Docker', 'Capacitor'] },
+  { category: 'Auth & Payments', icon: '🔐', skills: ['BetterAuth', 'Passkey', '2FA', 'Stripe API'] },
+  { category: 'Tools',           icon: '🛠️', skills: ['Git', 'GitHub'] },
+]
 
 export const HOBBIES = [
   {
     icon: '🧶', name: 'Crochet & Knitting', color: '#c8813a',
-    desc: 'I find debugging a pattern and debugging code surprisingly similar — both need patience, a systematic eye, and the willingness to unravel and start over. Every project is its own finite state machine.',
+    desc: "I find debugging a pattern and debugging code surprisingly similar — both need patience, a systematic eye, and the willingness to unravel and start over. Every project is its own finite state machine.",
   },
   {
     icon: '📖', name: 'Reading', color: '#6b3a1f',
-    desc: 'Mostly sci-fi and philosophy. Reading across disciplines helps me connect dots I\'d otherwise miss — which shows up in how I approach system design and problem-solving.',
+    desc: "Mostly sci-fi and philosophy. Reading across disciplines helps me connect dots I'd otherwise miss — which shows up in how I approach system design and problem-solving.",
   },
   {
     icon: '✏️', name: 'Sketching', color: '#4a7c59',
-    desc: 'I think visually. I\'ll sketch out a UI on paper before I open Figma, and wireframe on a napkin before writing a line of code. It keeps me from over-engineering before I\'ve understood the shape of the problem.',
+    desc: "I think visually. I'll sketch out a UI on paper before I open Figma, and wireframe on a napkin before writing a line of code. It keeps me from over-engineering before I've understood the shape of the problem.",
   },
   {
     icon: '🌊', name: 'Swimming', color: '#3a6b8a',
-    desc: 'Long-form focus in a world of constant notifications. The same patience it takes to hold a rhythm for 2km is what gets me through a 3AM production incident without panicking.',
+    desc: "Long-form focus in a world of constant notifications. The same patience it takes to hold a rhythm for 2km is what gets me through a 3AM production incident without panicking.",
   },
-];
+]
 
 export const CONTACT = [
   { label: 'Email',    val: 'khushi.trivedi.j@gmail.com',     href: 'mailto:khushi.trivedi.j@gmail.com' },
   { label: 'LinkedIn', val: 'linkedin.com/in/khushitrivedij', href: 'https://linkedin.com/in/khushitrivedij' },
   { label: 'GitHub',   val: 'github.com/khushijtrivedi',      href: 'https://github.com/khushijtrivedi' },
   { label: 'Location', val: 'Surat, Gujarat, India',          href: '#' },
-];
+]

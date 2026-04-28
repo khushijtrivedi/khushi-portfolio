@@ -1,21 +1,13 @@
 'use client';
-
-interface Props { onWork: () => void; onContact: () => void }
-
-const PILLS: [string, 'gold' | 'cream' | 'rust'][] = [
-  ['React · Next.js · TS', 'gold'],
-  ['LangChain · Mastra · LLMs', 'cream'],
-  ['AWS S3 · Lambda · SQS', 'gold'],
-  ['Agentic Workflows', 'cream'],
-  ['Stripe · BetterAuth · 2FA', 'rust'],
-  ['Node.js · Microservices', 'rust'],
-];
+import { SITE_META, HERO_PILLS, HERO_CTA } from './data';
 
 const pillStyles: Record<'gold' | 'cream' | 'rust', React.CSSProperties> = {
   gold:  { borderColor: 'rgba(200,129,58,0.45)', color: 'var(--gold)' },
   cream: { borderColor: 'rgba(232,200,154,0.35)', color: 'var(--cream)' },
   rust:  { borderColor: 'rgba(160,82,45,0.45)',   color: '#b06830' },
 };
+
+interface Props { onWork: () => void; onContact: () => void }
 
 export default function HeroSection({ onWork, onContact }: Props) {
   return (
@@ -28,18 +20,18 @@ export default function HeroSection({ onWork, onContact }: Props) {
       alignItems: 'center',
       justifyContent: 'center',
       textAlign: 'center',
-      padding: '80px 48px',
+      padding: 'clamp(80px, 10vh, 120px) clamp(16px, 6vw, 48px)',
       zIndex: 1,
     }}>
 
-      {/* Tag */}
+      {/* Role tag */}
       <div style={{
         display: 'flex', alignItems: 'center', gap: 14, marginBottom: 24,
         fontFamily: "'JetBrains Mono', monospace", fontSize: 11,
         letterSpacing: 4, textTransform: 'uppercase', color: 'var(--gold)',
       }}>
         <span style={{ width: 44, height: 1, background: 'var(--gold)', opacity: 0.3 }} />
-        full stack engineer
+        {SITE_META.roleShort}
         <span style={{ width: 44, height: 1, background: 'var(--gold)', opacity: 0.3 }} />
       </div>
 
@@ -47,47 +39,55 @@ export default function HeroSection({ onWork, onContact }: Props) {
       <h1 style={{
         fontFamily: "'Playfair Display', serif",
         fontWeight: 900,
-        fontSize: 'clamp(52px, 9vw, 106px)',
+        fontSize: 'clamp(40px, 9vw, 106px)',
         lineHeight: 0.92,
         letterSpacing: -3,
         color: 'var(--text)',
         marginBottom: 14,
       }}>
-        Khushi <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>Trivedi</em>
+        {SITE_META.name.split(' ')[0]}{' '}
+        <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>
+          {SITE_META.name.split(' ')[1]}
+        </em>
       </h1>
 
-      {/* Subtitle */}
+      {/* Tagline */}
       <p style={{
         fontFamily: "'Playfair Display', serif",
         fontStyle: 'italic',
-        fontSize: 'clamp(15px, 2.3vw, 22px)',
+        fontSize: 'clamp(14px, 2.3vw, 22px)',
         color: 'var(--muted)',
         marginBottom: 26,
       }}>
-        Building AI-powered products from Surat to the stars
+        {SITE_META.tagline}
       </p>
 
       {/* Bio */}
       <p style={{
         fontFamily: "'DM Sans', sans-serif",
-        fontSize: 18,
+        fontSize: 'clamp(14px, 2vw, 18px)',
         lineHeight: 1.8,
         color: 'var(--text)',
         opacity: 0.85,
         marginBottom: 44,
         maxWidth: 600,
+        whiteSpace: 'pre-line',
       }}>
-        React · Next.js · TypeScript · LangChain · AWS · Mastra<br />
-        Shipping features that real people use every day.<br />
-        Master&apos;s from DAIICT · Agentic AI · Things that actually work.
+        {SITE_META.bio}
       </p>
 
       {/* Pills */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, justifyContent: 'center', marginBottom: 44, maxWidth: 700 }}>
-        {PILLS.map(([label, color]) => (
+      <div style={{
+        display: 'flex', flexWrap: 'wrap', gap: 8,
+        justifyContent: 'center', marginBottom: 44,
+        maxWidth: 700,
+        padding: '0 8px',
+      }}>
+        {HERO_PILLS.map(({ label, color }) => (
           <span key={label} style={{
             fontFamily: "'JetBrains Mono', monospace",
-            fontSize: 10, letterSpacing: 1.5,
+            fontSize: 'clamp(8px, 1.5vw, 10px)',
+            letterSpacing: 1.5,
             textTransform: 'uppercase',
             padding: '6px 15px', borderRadius: 100,
             border: '1px solid', cursor: 'default',
@@ -99,24 +99,32 @@ export default function HeroSection({ onWork, onContact }: Props) {
       </div>
 
       {/* CTA Buttons */}
-      <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', justifyContent: 'center' }}>
+      <div style={{
+        display: 'flex', gap: 14,
+        flexWrap: 'wrap', justifyContent: 'center',
+        padding: '0 16px',
+      }}>
         <button onClick={onWork} style={{
           fontFamily: "'JetBrains Mono', monospace",
           fontSize: 11, letterSpacing: 2, textTransform: 'uppercase',
-          padding: '13px 32px', borderRadius: 100,
+          padding: 'clamp(10px, 2vw, 13px) clamp(20px, 4vw, 32px)',
+          borderRadius: 100,
           background: 'var(--gold)', color: 'var(--bg)',
           border: 'none', fontWeight: 700, cursor: 'pointer',
+          whiteSpace: 'nowrap',
         }}>
-          View My Work ↓
+          {HERO_CTA.primary}
         </button>
         <button onClick={onContact} style={{
           fontFamily: "'JetBrains Mono', monospace",
           fontSize: 11, letterSpacing: 2, textTransform: 'uppercase',
-          padding: '13px 32px', borderRadius: 100,
+          padding: 'clamp(10px, 2vw, 13px) clamp(20px, 4vw, 32px)',
+          borderRadius: 100,
           background: 'transparent', color: 'var(--gold)',
           border: '1px solid rgba(200,129,58,0.5)', cursor: 'pointer',
+          whiteSpace: 'nowrap',
         }}>
-          Get In Touch
+          {HERO_CTA.secondary}
         </button>
       </div>
 
@@ -127,9 +135,21 @@ export default function HeroSection({ onWork, onContact }: Props) {
         display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 7,
         opacity: 0.35, animation: 'cue 2.5s ease-in-out infinite',
       }}>
-        <style>{`@keyframes cue{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}`}</style>
+        <style>{`
+          @keyframes cue {
+            0%,100% { transform:translateX(-50%) translateY(0) }
+            50%      { transform:translateX(-50%) translateY(8px) }
+          }
+          @media (max-width: 640px) {
+            .hero-bio { font-size: 14px !important; }
+          }
+        `}</style>
         <div style={{ width: 1, height: 38, background: 'linear-gradient(to bottom, var(--gold), transparent)' }} />
-        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 9, letterSpacing: 3, textTransform: 'uppercase', color: 'var(--gold)' }}>scroll</span>
+        <span style={{
+          fontFamily: "'JetBrains Mono', monospace",
+          fontSize: 9, letterSpacing: 3,
+          textTransform: 'uppercase', color: 'var(--gold)',
+        }}>scroll</span>
       </div>
     </section>
   );
