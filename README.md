@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌐 Khushi Trivedi – Portfolio
 
-## Getting Started
+Live: https://khushi-portfolio-orcin.vercel.app
 
-First, run the development server:
+## 🚀 About
+This is my personal portfolio website showcasing my work as a Full Stack Software Engineer with a focus on AI-integrated applications and SaaS products.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🛠️ Tech Stack
+- Next.js
+- React.js
+- TypeScript
+- Tailwind CSS
+- Vercel (Deployment)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Features
+- Clean, responsive UI
+- Projects showcasing full-stack and AI-based work
+- Fast performance and SEO-friendly structure
+- Contact section for easy reach
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🧠 Highlight
+I have experience building:
+- Full-stack SaaS applications (React + Node.js)
+- AI-powered workflows using LLMs (LangChain, automation systems)
+- REST APIs and scalable backend systems
+- Cloud integrations using AWS
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📂 Projects Included
+- AI-powered automation workflows
+- SaaS modules (tracking, rules engine, etc.)
+- Full-stack applications with real-world use cases
