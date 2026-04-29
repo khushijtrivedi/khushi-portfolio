@@ -11,7 +11,7 @@ export const SITE_META = {
   linkedinHref: 'https://linkedin.com/in/khushitrivedij',
   github: 'github.com/khushijtrivedi',
   githubHref: 'https://github.com/khushijtrivedi',
-  tagline: 'Building AI-powered products from Surat to the stars',
+  tagline: 'Building AI-powered SaaS applications.',
   bio: `React · Next.js · TypeScript · LangChain · AWS · Mastra\nShipping features that real people use every day.\nMaster's from DAIICT · Agentic AI · Things that actually work.`,
   openToWork: true,
   footerQuip: 'built with ☕ yarn & way too many tabs open',
@@ -30,30 +30,33 @@ export const STAR_WARS_INTRO = {
 } as const
 
 export const HERO_PILLS: { label: string; color: 'gold' | 'cream' | 'rust' }[] = [
-  { label: 'React · Next.js · TS',      color: 'gold'  },
+  { label: 'React · Next.js · TS', color: 'gold' },
   { label: 'LangChain · Mastra · LLMs', color: 'cream' },
-  { label: 'AWS S3 · Lambda · SQS',     color: 'gold'  },
-  { label: 'Agentic Workflows',          color: 'cream' },
-  { label: 'Stripe · BetterAuth · 2FA', color: 'rust'  },
-  { label: 'Node.js · Microservices',   color: 'rust'  },
+  { label: 'AWS S3 · Lambda · SQS', color: 'gold' },
+  { label: 'Agentic Workflows', color: 'cream' },
+  { label: 'Stripe · BetterAuth · 2FA', color: 'rust' },
+  { label: 'Node.js · Microservices', color: 'rust' },
 ]
 
 export const HERO_CTA = {
   primary: 'View My Work ↓',
   secondary: 'Get In Touch',
-  contactButton: '✦ Send a Transmission ✦',
+  contactButton: '✦ Chat with My Assistant ✦',
   contactDesc: `I'm looking for a team that moves fast, trusts engineers to own their work end-to-end, and builds products that matter. If that's you, let's talk.`,
   openBadge: 'currently open to new roles',
   contactTagline: "Whether you have a role, a project, or just want to talk about crochet patterns — I'm easy to reach.",
 } as const
 
 export const SECTION_HEADERS = {
-  work:      { num: '01', title: 'The',        em: 'Work',       sub: 'Every career is a pour-over. Seed, grind, brew.' },
-  education: { num: '02', title: 'The',        em: 'Foundation', sub: 'Where curiosity met structure.' },
-  skills:    { num: '03', title: 'The',        em: 'Stack',      sub: 'The tools I reach for. Earned through shipping, not just learning.' },
-  life:      { num: '04', title: 'Beyond the', em: 'Code',       sub: "What I do when I'm not at a keyboard shapes how I think when I am." },
-  contact:   { num: '05', title: 'Find',       em: 'Me',         sub: '' },
-  cta:       { title: "Let's Build Something", sub: `I'm looking for a team that moves fast, trusts engineers to own their work end-to-end, and builds products that matter. If that's you, let's talk.` },
+  work: { num: '01', title: 'The', em: 'Work', sub: 'Every career is a pour-over. Seed, grind, brew.' },
+  education: { num: '02', title: 'The', em: 'Foundation', sub: 'Where curiosity met structure.' },
+  skills: { num: '03', title: 'The', em: 'Stack', sub: 'The tools I reach for. Earned through shipping, not just learning.' },
+  life: { num: '04', title: 'Beyond the', em: 'Code', sub: "What I do when I'm not at a keyboard shapes how I think when I am." },
+  contact: { num: '05', title: 'Find', em: 'Me', sub: '' },
+  cta: {
+    title: "Ask Me Anything",
+    sub: `Curious about my experience, stack, or what I'm looking for? Chat with my AI assistant — it knows everything about my work.`,
+  },
 } as const
 
 export const JOBS = [
@@ -124,13 +127,13 @@ export const EDUCATION = [
 ]
 
 export const SKILL_GROUPS = [
-  { category: 'Frontend',        icon: '🖼️', skills: ['React.js', 'Next.js', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3'] },
-  { category: 'Backend',         icon: '⚙️', skills: ['Node.js', 'REST APIs', 'Microservices', 'Flask', 'Python'] },
-  { category: 'AI & LLM',        icon: '🤖', skills: ['LangChain', 'Mastra', 'LLM Integrations', 'Agentic Workflows', 'Prompt Engineering'] },
-  { category: 'Database',        icon: '🗄️', skills: ['MySQL', 'SQL'] },
-  { category: 'Cloud & DevOps',  icon: '☁️', skills: ['AWS S3', 'AWS Lambda', 'AWS SQS', 'Serverless', 'Docker', 'Capacitor'] },
+  { category: 'Frontend', icon: '🖼️', skills: ['React.js', 'Next.js', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3'] },
+  { category: 'Backend', icon: '⚙️', skills: ['Node.js', 'REST APIs', 'Microservices', 'Flask', 'Python'] },
+  { category: 'AI & LLM', icon: '🤖', skills: ['LangChain', 'Mastra', 'LLM Integrations', 'Agentic Workflows', 'Prompt Engineering'] },
+  { category: 'Database', icon: '🗄️', skills: ['MySQL', 'SQL'] },
+  { category: 'Cloud & DevOps', icon: '☁️', skills: ['AWS S3', 'AWS Lambda', 'AWS SQS', 'Serverless', 'Docker', 'Capacitor'] },
   { category: 'Auth & Payments', icon: '🔐', skills: ['BetterAuth', 'Passkey', '2FA', 'Stripe API'] },
-  { category: 'Tools',           icon: '🛠️', skills: ['Git', 'GitHub'] },
+  { category: 'Tools', icon: '🛠️', skills: ['Git', 'GitHub'] },
 ]
 
 export const HOBBIES = [
@@ -153,8 +156,8 @@ export const HOBBIES = [
 ]
 
 export const CONTACT = [
-  { label: 'Email',    val: 'khushi.trivedi.j@gmail.com',     href: 'mailto:khushi.trivedi.j@gmail.com' },
+  { label: 'Email', val: 'khushi.trivedi.j@gmail.com', href: 'mailto:khushi.trivedi.j@gmail.com' },
   { label: 'LinkedIn', val: 'linkedin.com/in/khushitrivedij', href: 'https://linkedin.com/in/khushitrivedij' },
-  { label: 'GitHub',   val: 'github.com/khushijtrivedi',      href: 'https://github.com/khushijtrivedi' },
-  { label: 'Location', val: 'Surat, Gujarat, India',          href: '#' },
+  { label: 'GitHub', val: 'github.com/khushijtrivedi', href: 'https://github.com/khushijtrivedi' },
+  { label: 'Location', val: 'Surat, Gujarat, India', href: '#' },
 ]
